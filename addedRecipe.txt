@@ -1,0 +1,107 @@
+Recipe Management App
+============================
+       Recipe Details       
+============================
+🍲 Recipe Name: Pancakes
+----------------------------
+🥄 Ingredients:
+----------------------------
+Name     |     Quantity
+----------------------------
+Flour		2 cups
+Milk		1 cup
+----------------------------
+📖 Preparation Time:
+----------------------------
+0 hours, 15 minutes, 0 seconds
+----------------------------
+📖 Cooking Instructions:
+----------------------------
+Mix ingredients and cook.
+----------------------------
+👍 Likes: 5
+----------------------------
+⭐ Average Rating: 4
+----------------------------
+👤 Added By: rohit
+============================
+============================
+       Recipe Details       
+============================
+🍲 Recipe Name: Grilled Cheese Sandwich
+----------------------------
+🥄 Ingredients:
+----------------------------
+Name     |     Quantity
+----------------------------
+Bread		2 slices
+Cheese		2 slices
+Butter		1 tbsp
+----------------------------
+📖 Preparation Time:
+----------------------------
+0 hours, 10 minutes, 0 seconds
+----------------------------
+📖 Cooking Instructions:
+----------------------------
+Butter bread and cook with cheese until golden brown.
+----------------------------
+👍 Likes: 10
+----------------------------
+⭐ Average Rating: 5
+----------------------------
+👤 Added By: rohit
+============================
+============================
+       Recipe Details       
+============================
+🍲 Recipe Name: Overnight Oats
+----------------------------
+🥄 Ingredients:
+----------------------------
+Name     |     Quantity
+----------------------------
+Oats		1 cup
+Milk		1 cup
+Honey		1 tbsp
+Banana		1 sliced
+----------------------------
+📖 Preparation Time:
+----------------------------
+0 hours, 8 minutes, 0 seconds
+----------------------------
+📖 Cooking Instructions:
+----------------------------
+Mix oats and milk. Refrigerate overnight. Top with honey and banana.
+----------------------------
+👍 Likes: 7
+----------------------------
+⭐ Average Rating: 3
+----------------------------
+👤 Added By: rohit
+============================
+============================
+       Recipe Details       
+============================
+🍲 Recipe Name: idli
+----------------------------
+🥄 Ingredients:
+----------------------------
+Name     |     Quantity
+----------------------------
+rice		22
+----------------------------
+📖 Preparation Time:
+----------------------------
+1 hours, 3 minutes, 4 seconds
+----------------------------
+📖 Cooking Instructions:
+----------------------------
+fdisaddfas
+----------------------------
+👍 Likes: 10
+----------------------------
+⭐ Average Rating: 4
+----------------------------
+👤 Added By: gyan
+============================

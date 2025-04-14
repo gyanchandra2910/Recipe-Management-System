@@ -1,4 +1,4 @@
-# Recipe Management App
+# Recipe Management System
 Object-Oriented Programming (OOP) based Recipe Management Application
 
 ---
@@ -10,12 +10,15 @@ Object-Oriented Programming (OOP) based Recipe Management Application
 ---
 
 ## 1. Project Overview
-This section provides an overview of the Recipe Management App, developed using core Object-Oriented Programming (OOP) principles.
-
----
+This Recipe Management System is developed using core Object-Oriented Programming (OOP) principles to create an efficient system for storing, retrieving, and managing recipe information.
 
 ### 1.1 Objective
-The primary objective of this project is to create a user-friendly Recipe Management Application that allows users to store, manage, and retrieve recipe information efficiently.  
+The primary objective is to create a user-friendly Recipe Management Application that allows users to:
+- Store and retrieve recipes
+- Rate and like recipes
+- Search for specific recipes 
+- Manage recipe ingredients
+
 This application leverages OOP concepts such as:
 - **Encapsulation**  
 - **Abstraction**  
@@ -23,8 +26,6 @@ This application leverages OOP concepts such as:
 - **Composition**  
 
 The goal is to ensure modular and maintainable code.
-
----
 
 ### 1.2 Features Implemented
 The following OOP features and techniques have been applied:
@@ -53,108 +54,186 @@ The following OOP features and techniques have been applied:
 
 ---
 
-## 2. Encapsulation and Abstraction
+## 2. Class Architecture
+
 ### 2.1 **Recipe Class**  
+```cpp
+class Recipe {
+private:
+    string recipeName;
+    vector<string> ingredients;
+    string instructions;
+    Time preparationTime;
+    double ratings;
+    int likes;
+    int ratingCount;
+    string addedBy;
+    
+public:
+    // Methods for managing recipe data
+    void addRatings(double);
+    void addIngredients(string);
+    void removeIngredients(string);
+    void increaseLikes();
+    string getRecipeName();
+    // ... other methods
+};
+```
 - Key data members are private.  
-- Public methods like `addRatings()`, `addIngredients()`, and `getRecipeName()` provide controlled access.  
+- Public methods provide controlled access.  
 
 ### 2.2 **User Class**  
-- Private members like `username` and `password` are accessible only through public methods like `getUsername()` and `setPassword()`.  
+```cpp
+class User {
+private:
+    string username;
+    string email;
+    string password;
+    
+public:
+    // Authentication and profile methods
+    string getUsername();
+    void setPassword(string);
+    bool authenticate(string);
+    // ... other methods
+};
+```
+- Private members like `username` and `password` are accessible only through public methods.
 - Ensures secure handling of user data.  
 
 ### 2.3 **Time Class**  
+```cpp
+class Time {
+private:
+    int hour;
+    int minute;
+    int second;
+    
+public:
+    // Time manipulation methods
+    void setTime(int, int, int);
+    void getTime();
+    // ... other methods
+};
+```
 - Encapsulation of hour, minute, and second fields.  
 - Included as a member of the `Recipe` class using composition.  
 
 ---
 
-## 3. User Authentication/Authorization
-### 3.1 **Signup**
+## 3. User Authentication System
+
+### 3.1 **Signup Process**
 - User selects Signup and enters a username and password.  
+- System checks for duplicate usernames
 - Credentials are saved to a file.  
 - A welcome message confirms successful signup.  
 
-### 3.2 **Login**
+### 3.2 **Login Process**
 - User inputs credentials for login.  
+- System validates against stored data
 - If matched, displays "Login successful!"  
 
-### 3.3 **Duplicate Check**
+### 3.3 **Authorization Features**
 - Prevents creating accounts with the same username.  
-- Displays "User already exists! Please Login."  
+- Only recipe creators can modify their own recipes
+- Secure credential storage
 
 ---
 
-## 4. Definitions (Authentication)
-- **Signup Function:** Handles new user registration.  
-- **Handle Login:** Validates and authenticates user credentials.  
-- **Handle Signup:** Manages new user creation.  
+## 4. Advanced Features
 
----
-
-## 5. Function Templates
+### 4.1 **Function Templates**
 Function templates enable generic programming for different data types and operations:  
 
-1. **Template Flexibility:**  
-   - `bubbleSortRecipes()` sorts recipes by likes or ratings.  
-   - Works for both `int` (likes) and `double` (ratings).  
+```cpp
+template <typename T>
+void bubbleSortRecipes(vector<Recipe>& recipes, T Recipe::* field, bool ascending = false) {
+    // Sorting implementation
+}
+```
 
-2. **Bubble Sort Optimization:**  
-   - Stops early if already sorted using a swapped flag.  
+- `bubbleSortRecipes()` sorts recipes by likes or ratings.  
+- Works for both `int` (likes) and `double` (ratings).
+- Optimized with early stopping using a swapped flag
+- User can choose the sorting criterion.  
 
-3. **Descending Order Sorting:**  
-   - Sorts recipes in descending order.  
+### 4.2 **Operator Overloading**
+```cpp
+// Output operator
+ostream& operator<<(ostream& out, Recipe& recipe);
 
-4. **User Prompt:**  
-   - User can choose the sorting criterion.  
+// Input operator
+istream& operator>>(istream& in, Recipe& recipe);
 
----
+// Comparison operator
+bool operator==(Recipe& recipe1, Recipe& recipe2);
+```
 
-## 6. Constructors Definitions
-1. **Time Constructor** – Initializes time values.  
-2. **Recipe Constructor** – Initializes recipe details.  
-3. **Recipe Copy Constructor** – Copies recipe data.  
-4. **User Constructor** – Initializes user information.  
-
----
-
-## 7. Operator and Function Overloading
-1. **Overloaded `<<` Operator:**  
-   - Displays recipe details in a formatted way.  
-
-2. **Overloaded `>>` Operator:**  
-   - Takes input for data members in one go.  
-
-3. **Overloaded `==` Operator:**  
-   - Compares recipes based on common ingredients.  
-   - Returns true if any common ingredients exist.  
-
-4. **Function Overloading:**  
-   - Multiple constructors for Recipe with different parameters.  
+- **Overloaded `<<` Operator:** Displays recipe details in a formatted way.  
+- **Overloaded `>>` Operator:** Takes input for data members in one go.  
+- **Overloaded `==` Operator:** Compares recipes based on common ingredients.  
+- **Function Overloading:** Multiple constructors for Recipe with different parameters.  
 
 ---
 
-## 8. Overloading Definitions
-- `<<` Operator – Outputs recipe details.  
-- `>>` Operator – Takes input for recipe details.  
-- `==` Operator – Checks for common ingredients.  
+## 5. Recipe Management Features
 
----
-
-## 9. Implemented Features in App
-### 9.1 **Modify Ingredients**
+### 5.1 **Modify Ingredients**
 - `addIngredients()` – Adds ingredients to a recipe.  
 - `removeIngredients()` – Removes ingredients from a recipe.  
 
-**Conditions:**  
+**Authorization:**  
 - Only logged-in users can modify their own recipes.  
+
+### 5.2 **Social Features**
+- **Increase Likes:** `increaseLikes()` – Adds 1 to the total likes.  
+- **Add Ratings:** `addRatings()` – Updates average rating using:  
+```
+ratings = (ratings × ratingCount + addedRating) / (ratingCount + 1)
+```
+- **Find Common Ingredients:** Check if recipes share ingredients using overloaded `==` operator
+
+### 5.3 **Recipe Discovery**
+- Search functionality for finding specific recipes
+- Sort recipes by popularity (likes) or quality (ratings)
+- Recipe of the day feature (random selection)
 
 ---
 
-## 10. Implemented Features (Contd..)
-### 10.1 **Increase Likes**
-- `increaseLikes()` – Adds 1 to the total likes.  
+## 6. Data Storage
+The application uses file-based persistence:
+- `user.txt` - Stores user credentials
+- `recipeName.txt` - Stores recipe names
+- `addedRecipe.txt` - Stores complete recipe details
 
-### 10.2 **Add Ratings**
-- `addRatings()` – Updates average rating using:  
-```text
-ratings = (ratings × ratingCount + addedRating) / (ratingCount + 1)
+This approach ensures data persistence between application sessions.
+
+---
+
+## 7. Building and Running
+
+### Prerequisites
+- C++ compiler (C++11 or higher)
+- Standard Template Library (STL)
+
+### Compilation
+```bash
+g++ main.cpp defs.cpp utility.cpp -o recipe_app
+```
+
+### Execution
+```bash
+./recipe_app
+```
+
+---
+
+## 8. Future Enhancements
+- Graphical user interface
+- Recipe categorization and tags
+- Nutritional information calculation
+- Image support for recipes
+- Import/export feature for recipe sharing
+
+---
