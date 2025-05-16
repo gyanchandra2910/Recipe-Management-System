@@ -6,7 +6,7 @@ Object-Oriented Programming (OOP) based Recipe Management Application
 ## Indian Institute of Information Technology, Design & Manufacturing, Kancheepuram  
 **PREPARED BY:**  
 - **Gyan Chandra** – CS23I1053  
-
+- **Rohit Kumar** – CS23B2053  
 ---
 
 ## 1. Project Overview
