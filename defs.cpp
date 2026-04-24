@@ -27,9 +27,10 @@ ostream& operator<<(ostream& out, const Time& t)
 
 
 //recipe class(definitions)
-Recipe::Recipe(string name, vector<pair<string, string> > ingredients, string instructions, int likes, int ratings,User user, int hour, int minutes, int seconds)
+Recipe::Recipe(string name, vector<pair<string, string> > ingredients, string instructions, int likes, double ratings,User user, int hour, int minutes, int seconds)
     : prep_time(hour, minutes, seconds)
 {
+    this->id = 0;
     this->name = name;
     this->ingredients = ingredients;
     this->instructions = instructions;
@@ -67,10 +68,20 @@ void Recipe::increaseLikes() // increase likes
     likes++;
 }
 
-string Recipe::getRecipeName()
+string Recipe::getRecipeName() const
 {
     return name;
 }
+
+string Recipe::getInstructions() const { return instructions; }
+int Recipe::getLikes() const { return likes; }
+double Recipe::getRatings() const { return ratings; }
+int Recipe::getRatingCount() const { return ratingCount; }
+string Recipe::getAddedBy() const { return addedBy; }
+const vector<pair<string, string> >& Recipe::getIngredients() const { return ingredients; }
+const Time& Recipe::getPrepTime() const { return prep_time; }
+int Recipe::getId() const { return id; }
+void Recipe::setId(int i) { id = i; }
 
 ostream& operator <<(ostream &out,const Recipe& r)
 {
@@ -148,10 +159,19 @@ User::User(string username,string email,string pass)
     this->password=pass;
 }
 
-string User::getUsername()
+string User::getUsername() const
 {
     return username;
 }
+
+string User::getEmail() const { return email; }
+string User::getPass() const { return password; }
+int User::getId() const { return id; }
+void User::setId(int i) { id = i; }
+void User::setName(const string& n) { username = n; }
+void User::setPass(const string& p) { password = p; }
+void User::setEmail(const string& e) { email = e; }
+void User::setUserToNull() { id = 0; username = ""; email = ""; password = ""; }
 
 istream& operator>>(istream& in, User& u) 
 {

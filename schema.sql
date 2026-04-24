@@ -1,0 +1,29 @@
+CREATE DATABASE IF NOT EXISTS recipe_db;
+USE recipe_db;
+
+CREATE TABLE IF NOT EXISTS Users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) NOT NULL UNIQUE,
+    email VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS Recipes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    instructions TEXT NOT NULL,
+    prep_time VARCHAR(255) NOT NULL,
+    likes INT DEFAULT 0,
+    ratings DOUBLE DEFAULT 0.0,
+    ratingCount INT DEFAULT 1,
+    added_by_user_id INT,
+    FOREIGN KEY (added_by_user_id) REFERENCES Users(id) ON DELETE SET NULL
+);
+
+CREATE TABLE IF NOT EXISTS Ingredients (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    recipe_id INT NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    quantity VARCHAR(255) NOT NULL,
+    FOREIGN KEY (recipe_id) REFERENCES Recipes(id) ON DELETE CASCADE
+);

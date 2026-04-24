@@ -1,239 +1,59 @@
 # Recipe Management System
-Object-Oriented Programming (OOP) based Recipe Management Application
+An Object-Oriented Programming (OOP) project built in C++ that uses a MySQL database.
 
 ---
 
 ## Indian Institute of Information Technology, Design & Manufacturing, Kancheepuram  
 **PREPARED BY:**  
 - **Gyan Chandra** – CS23I1053  
-- **Rohit Kumar** – CS23B2053  
 ---
 
-## 1. Project Overview
-This Recipe Management System is developed using core Object-Oriented Programming (OOP) principles to create an efficient system for storing, retrieving, and managing recipe information.
+## 1. About the Project
+This is a simple Recipe Management System built for my college OOPs project. It allows users to store, view, search, and rate recipes. Previously, the project used text files (`<fstream>`) to save data, but I have upgraded it to use a real **MySQL database** for better data management.
 
-### 1.1 Objective
-The primary objective is to create a user-friendly Recipe Management Application that allows users to:
-- Store and retrieve recipes
-- Rate and like recipes
-- Search for specific recipes 
-- Manage recipe ingredients
-
-This application leverages OOP concepts such as:
-- **Encapsulation**  
-- **Abstraction**  
-- **Classes**  
-- **Composition**  
-
-The goal is to ensure modular and maintainable code.
-
-### 1.2 Features Implemented
-The following OOP features and techniques have been applied:
-
-- **Encapsulation:**  
-   Bundling data (attributes) and functions (behaviors) within a class. Each class (like Recipe or User) controls access to its data to maintain integrity and modularity.
-
-- **Abstraction:**  
-   Exposing only essential attributes and behaviors while hiding internal implementation details. Data members are private, accessed via public functions.
-
-- **Classes and Composition:**  
-   - Defined classes for Recipe, User, and Time.  
-   - Composition shows a "has-a" relationship where Recipe includes a Time object.  
-
-- **Function Templates:**  
-   - Generic templates for sorting and filtering recipes based on likes and ratings.  
-   - Code reusability and flexibility.  
-
-- **File Handling:**  
-   - Persistent storage for recipes and user data using text files.  
-   - Ensures data is saved and retrieved even after restarting the application.  
-
-- **User Authentication and Authorization:**  
-   - Login and signup systems.  
-   - Prevents duplicate accounts and ensures secure access.  
+### Features
+- **User Login & Signup:** Users can create an account and login. It uses MySQL to check if the user already exists.
+- **Add Recipes:** Users can add new recipes, including the ingredients, cooking time, and instructions.
+- **View Recipes:** You can see all the recipes in the database or search for a specific one.
+- **Rate and Like:** You can like a recipe or give it a rating out of 5. The average rating is calculated mathematically.
+- **Find Common Ingredients:** The project can compare two recipes to find matching ingredients.
+- **Recipe of the Day:** It shows a random recipe every day.
 
 ---
 
-## 2. Class Architecture
+## 2. Technical Details (OOPs Concepts Used)
 
-### 2.1 **Recipe Class**  
-```cpp
-class Recipe {
-private:
-    string recipeName;
-    vector<string> ingredients;
-    string instructions;
-    Time preparationTime;
-    double ratings;
-    int likes;
-    int ratingCount;
-    string addedBy;
-    
-public:
-    // Methods for managing recipe data
-    void addRatings(double);
-    void addIngredients(string);
-    void removeIngredients(string);
-    void increaseLikes();
-    string getRecipeName();
-    // ... other methods
-};
-```
-- Key data members are private.  
-- Public methods provide controlled access.  
-
-### 2.2 **User Class**  
-```cpp
-class User {
-private:
-    string username;
-    string email;
-    string password;
-    
-public:
-    // Authentication and profile methods
-    string getUsername();
-    void setPassword(string);
-    bool authenticate(string);
-    // ... other methods
-};
-```
-- Private members like `username` and `password` are accessible only through public methods.
-- Ensures secure handling of user data.  
-
-### 2.3 **Time Class**  
-```cpp
-class Time {
-private:
-    int hour;
-    int minute;
-    int second;
-    
-public:
-    // Time manipulation methods
-    void setTime(int, int, int);
-    void getTime();
-    // ... other methods
-};
-```
-- Encapsulation of hour, minute, and second fields.  
-- Included as a member of the `Recipe` class using composition.  
+I have used the following Object-Oriented Programming concepts in C++:
+- **Classes & Objects:** Different classes like `User`, `Recipe`, and `Time` are used to organize the code.
+- **Encapsulation:** Important data variables like `password` and `ratings` are kept `private` and accessed using public getters and setters.
+- **Abstraction:** The complex database queries are hidden inside `utility.cpp`.
+- **Composition:** The `Time` class is used as an object inside the `Recipe` class (a "has-a" relationship).
+- **Function Templates:** I used `template <typename T>` to write a single bubble sort function that can sort recipes by both `likes` (integers) and `ratings` (doubles).
+- **Operator Overloading:** I overloaded `<<` and `>>` to print objects directly using `cout`, and `==` to compare two recipes for common ingredients.
 
 ---
 
-## 3. User Authentication System
+## 3. Database Architecture (MySQL)
 
-### 3.1 **Signup Process**
-- User selects Signup and enters a username and password.  
-- System checks for duplicate usernames
-- Credentials are saved to a file.  
-- A welcome message confirms successful signup.  
+Instead of using basic text files, the project now uses a normalized **MySQL** database called `recipe_db`.
 
-### 3.2 **Login Process**
-- User inputs credentials for login.  
-- System validates against stored data
-- If matched, displays "Login successful!"  
+The database has 3 tables:
+1. **Users:** Stores `id`, `username`, `email`, and `password`.
+2. **Recipes:** Stores `id`, `name`, `instructions`, `prep_time`, `likes`, `ratings`, and a foreign key `added_by_user_id`.
+3. **Ingredients:** Because a recipe can have many ingredients, I made a separate table that stores `recipe_id`, `name`, and `quantity`.
 
-### 3.3 **Authorization Features**
-- Prevents creating accounts with the same username.  
-- Only recipe creators can modify their own recipes
-- Secure credential storage
+I used **Prepared Statements** (`MYSQL_STMT`) so the database is secure from SQL injection, and **JOIN queries** to fetch all ingredients for a recipe at once.
 
 ---
 
-## 4. Advanced Features
+## 4. How to Run This Project
 
-### 4.1 **Function Templates**
-Function templates enable generic programming for different data types and operations:  
+### Requirements
+- A 64-bit MinGW C++ compiler (`g++`)
+- MySQL Server installed locally
 
-```cpp
-template <typename T>
-void bubbleSortRecipes(vector<Recipe>& recipes, T Recipe::* field, bool ascending = false) {
-    // Sorting implementation
-}
-```
-
-- `bubbleSortRecipes()` sorts recipes by likes or ratings.  
-- Works for both `int` (likes) and `double` (ratings).
-- Optimized with early stopping using a swapped flag
-- User can choose the sorting criterion.  
-
-### 4.2 **Operator Overloading**
-```cpp
-// Output operator
-ostream& operator<<(ostream& out, Recipe& recipe);
-
-// Input operator
-istream& operator>>(istream& in, Recipe& recipe);
-
-// Comparison operator
-bool operator==(Recipe& recipe1, Recipe& recipe2);
-```
-
-- **Overloaded `<<` Operator:** Displays recipe details in a formatted way.  
-- **Overloaded `>>` Operator:** Takes input for data members in one go.  
-- **Overloaded `==` Operator:** Compares recipes based on common ingredients.  
-- **Function Overloading:** Multiple constructors for Recipe with different parameters.  
-
----
-
-## 5. Recipe Management Features
-
-### 5.1 **Modify Ingredients**
-- `addIngredients()` – Adds ingredients to a recipe.  
-- `removeIngredients()` – Removes ingredients from a recipe.  
-
-**Authorization:**  
-- Only logged-in users can modify their own recipes.  
-
-### 5.2 **Social Features**
-- **Increase Likes:** `increaseLikes()` – Adds 1 to the total likes.  
-- **Add Ratings:** `addRatings()` – Updates average rating using:  
-```
-ratings = (ratings × ratingCount + addedRating) / (ratingCount + 1)
-```
-- **Find Common Ingredients:** Check if recipes share ingredients using overloaded `==` operator
-
-### 5.3 **Recipe Discovery**
-- Search functionality for finding specific recipes
-- Sort recipes by popularity (likes) or quality (ratings)
-- Recipe of the day feature (random selection)
-
----
-
-## 6. Data Storage
-The application uses file-based persistence:
-- `user.txt` - Stores user credentials
-- `recipeName.txt` - Stores recipe names
-- `addedRecipe.txt` - Stores complete recipe details
-
-This approach ensures data persistence between application sessions.
-
----
-
-## 7. Building and Running
-
-### Prerequisites
-- C++ compiler (C++11 or higher)
-- Standard Template Library (STL)
-
-### Compilation
-```bash
-g++ main.cpp defs.cpp utility.cpp -o recipe_app
-```
-
-### Execution
-```bash
-./recipe_app
-```
-
----
-
-## 8. Future Enhancements
-- Graphical user interface
-- Recipe categorization and tags
-- Nutritional information calculation
-- Image support for recipes
-- Import/export feature for recipe sharing
-
----
+### Setup Steps
+1. Open MySQL and run the `schema.sql` file to create the tables.
+2. Open `utility.cpp` and put your MySQL password where it says `const char *DB_PASS = "YourPassword";`
+3. Double click on `build.bat` to compile the project.
+4. Run `RecipeApp.exe` in your terminal or double-click it.
